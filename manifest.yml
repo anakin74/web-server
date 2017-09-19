@@ -1,5 +1,5 @@
 ---
 applications:
- - name: node-web-server
+ - name: node-web-server-bm
    random-route: true
    memory: 128M

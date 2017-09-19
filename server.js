@@ -62,6 +62,19 @@ app.get('/about', (req, res) => {
    });
  });
 
-app.listen(port, () =>{
-  console.log(`Server is up on port ${port}`);
-});
+ var port = process.env.PORT || 3000
+ app.listen(port, function() {
+     console.log("To view your app, open this link in your browser: http://localhost:" + port);
+ });
+
+
+// load local VCAP configuration  and service credentials
+var vcapLocal;
+try {
+  vcapLocal = require('./vcap-local.json');
+  console.log("Loaded local VCAP", vcapLocal);
+} catch (e) { }
+
+const appEnvOpts = vcapLocal ? { vcap: vcapLocal} : {}
+
+const appEnv = cfenv.getAppEnv(appEnvOpts);
